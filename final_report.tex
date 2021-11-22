@@ -1,0 +1,168 @@
+\documentclass[12pt]{article}
+\usepackage{lingmacros}
+\usepackage{tree-dvips}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[section]{placeins}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{indentfirst}
+
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+}
+\title{\Huge \bfseries \emph{Mini Project: Socio-Economic Factors that Impact Potential Earning Income}}
+\author{Vathana Him}
+\date{November 1, 2021}
+
+\begin{document}
+\maketitle
+\section{Abstract}
+\hspace*{5mm} 
+The purpose of this mini research project is to examine future income based socio-economic factors 
+based on the census data set gathered from the UCI Machine Learning Repository. 
+This dataset contains many features that are intuitively considered to be predictors of 
+income earning potential. These features are age, education, workclass, marital-status, occupation, relationship, race, 
+capital-gains, capital-loss, hours-per-week worked, and native country. This data set will be used to 
+train two-class classification models to predict which features will likely lead to an income of greater 
+than fifty thousand dollars in USD and less than fifty thousand dollars in USD. 
+Two machine learning models that will be trained and used to predict this scenario. 
+The two machine learning models that will be used are Support Vector Machine (SVM) and 
+Random Forest Classifiers. The result of this mini-project will be determined in two-scope: the determination of factors
+that influence potential income earning and the anaylsis of the result between SVM and Random Forest Models. 
+The analysis of the results between the two models will be analyzed 
+in order to understand the accuracy of the two models for this dataset, and thus, 
+will indicate which machine learning model will be best for this dataset.
+
+\begin{multicols*}{2}
+\section{Introduction}
+\hspace*{5mm} Income inequality has been one of the most prominent social problems in America during modern times. It is often one of the main focuses of debates
+during midterm and presidential as well as through lenses of both the Republican and Demoncratic party. The increase in wealth generated for the upper-class
+of American household had come at the expense of the middle class as the wealth of the middle class of American families had experienced a decline since the late 1970s
+\footnote[1]{Horowitz, J. M., Igielnik, R.,  Kochhar, R. (2020, August 17). Trends in U.S. income and wealth inequality. Pew Research Center's Social Demographic Trends Project.}
+Income has been one of the main contributors to wealth and financial security as it serves to protect American families from the cycle of economics ups and downs that is
+the characteristics of a capitalist economy.
+
+\hspace*{5mm} The more income the average American families had, the more they're able to put into their savings and investments, and 
+thus provided a a financial security blanket for times of economic recessions. It can be seen time and time again that throughout the history of recessions in America,
+the middle class had been hit the hardest. \footnote[2]{Weller, C. (2021, January 6). The recession hits an already hollowed-out middle class. Forbes.} Examples of this can be
+seen through the lenses of the most recent recessions during the 2008 Financial Crisis and the 2020 Corona Virus pandemic. These recent recessions slashed into the already thining of the
+American middle class as it caused many to lose their homes and jobs, and at worst their businesses and livelihood. 
+
+\hspace*{5mm} As cycles of elections continue to happen, many presidential candidates and lawmakers have debated their ideas and proposed solutions to solve
+this growing gap of the American dying middle class. The recent polarization of American politics had left no room for this problem 
+to be solved in a timely manner as many conservative and liberal politicians continued to enforce their own point view and thus, hindering the process of providing
+a solution to fix this issue for the actual victims; the American middle class families. 
+
+\hspace*{5mm} Therefore, the purpose of this project was to look through the main contributing factors of income through a purely logical
+and statistical perspective based on the machine learning methods learned in class. The methods used were the training of machine learning models to find the variables 
+that can be seen as correlating to income with the use of support vector machine learning and random forest machine learning. This was aimed to understand
+important factors that can contribute to income and if these factors can be predicted to determine a persons potential income based on the targed variables. Finally,
+the comparisons of the results from these two models were also analyzed. 
+
+\section{Data Exploration} 
+\hspace*{5mm} The targeted dataset was retried from the UCI ML repository known as the "Adult Data Set" or "Census Income Data Set". \footnote[3]{UCI Machine Learning Repository: US Census data (1990) Data Set. (n.d.). Retrieved November 21, 2021}
+This dataset contains multivariant relationship to predict whether an individual income exceeds or below 50 thousand dollars per year. The features of this dataset
+includes Age, Workclass, Income-bracket, Education, Marital Status, Occupation, Relationship, Race, Sex, Captial-gain, Hours-per-week, and Native-Country. 
+
+\hspace*{5mm} Before the machine learning model was built, the analysis of the overall dataset occured. By examining an overview of the characteristics of our dataset,
+it can be seen that the age of our population was mostly distributed between the ages of 25 to 40 years old based on 3.1 Figure 1. Additionally, the majority of the population had 9 and 10 years of 
+total education. Capital gains, which is one of the indicators of wealth, had a heavily skewed distribution to the right as only a few percentage of the population of our dataset 
+had a capital gains of 25000 or greater shown in 3.2 Figure 4. Finally, it can be seen in 3.1 Figure 3 that the majority of the American population had a 40 hours work week. Because of the skewness presented
+in the numerical data of this dataset, the min-max scaler was used on the numerical datatypes before it was fed into the machine learning model. 
+\subsection{Data Exploration}
+  \begin{center}
+  	\captionof{figure}{Age Distribution}
+	\includegraphics[scale=0.4]{../screenshot/hist_age.png}
+	\captionof{figure}{Education Distribution}
+	\includegraphics[scale=0.4]{../screenshot/hist_edu.png}
+
+
+	\captionof{figure}{Hours Work Distribution}
+	\includegraphics[scale=0.4]{../screenshot/hist_work.png}
+
+
+	\captionof{figure}{Capital Gains Distribution}
+	\includegraphics[scale=0.4]{../screenshot/hist_cptgain.png}
+  \end{center}
+
+
+
+
+\section{Data Cleaning and Preparation}
+
+
+\hspace*{5mm} Aside from the numerical datatypes of this dataset, it also contained categorical datatypes. These categorical datatypes included occupation types, and marital/relationship statuses.
+Thus, in order to transform these categorical datatypes, the dummy encoding method was used. This method transformed categorical data by encoding them and transforming them into a set of binary variables.
+This transformed the dataset from a long format into a wide format. Subsequently, once the transformation was done, this dataset became a high dimensional dataset in which there were more features than observations.
+After this transformation was done, a heatmap was constructed to analyze if there were possible co-variances and co-correlated features that 
+need to be eliminated in order to maintain the integrity of the machine learning model, removed potential biases within the dataset, and removed the high dimensional aspect of the transformed dataset. 
+
+
+\hspace*{5mm} Based on the heatmap of the numerical features in 4.1 Figure 5, if can be seen that there were some co-correlated and co-variance features to the number of income. Capital-gains and capital-loss 
+for example had a co-correlating features to income. Additionally, for the categorical features of occupation and marital status, the heatmap was produced to determine if there were any co-correlating features. In
+Figure 4.2 Figure 6 that many marital and relationship statuses had co-correlating features towards income and thus, some of these features would need to be eliminated to prevent a bias in the model that could cause 
+it to factor in relationship and marital status as the heaviest weight. Finally, based on the the occupation heatmap of 4.2 Figure 7, it can also be seen that the majority of occupation had co-correlating and co-variance relationships
+to income made based on the similarity in colors of the heatmap. Therefore, in order to eliminate these co-correlating features, feature elimination would be used in order to remove potential
+biases of one feature over the other when training the machine learning models. 
+
+\subsection{Data Pre-Processing}
+  \begin{center}
+  	\captionof{figure}{Numerical Features HeatMap}
+	\includegraphics[scale=0.2]{../screenshot/heat1.png}
+  \end{center}
+
+  \subsection{Data Pre-Processing}
+  \begin{center}
+  	\captionof{figure}{Categorical Features HeatMap}
+	\includegraphics[scale=0.2]{../screenshot/heat2.png}
+
+	\captionof{figure}{Categorical Features HeatMap}
+	\includegraphics[scale=0.2]{../screenshot/heat3.png}
+  \end{center}
+
+  \hspace*{5mm} The feature selection method used to further pre-process the data was feature importance elimination. This method refers to the techniques that assign a score to the input features
+  based on how useful they are in predicting the target variable through statistical correlation scores and coefficients and then eliminate any features that is below the average
+  threshold value.\footnote[4]{Sklearn-feature-selection-Selectfrommodel. scikit. (n.d.). Retrieved November 22, 2021, from  https://scikit-learn.org} The feature importance elimination method resulted in a large
+  reduction in number of co-correlated and co-variance features and eliminated the high number of features of the dataset after its categorical dummy enconding. 
+  The total number of features choosen was 11 features out of 87 features. Many of the features included variables such as age, hours work per week, education, and capital gains as these features can intuitively be determined to have
+  a large impact on income as seen in 4.3 Figure 8. 
+
+
+  \subsection{Data Pre-Processing}
+  \begin{center}
+  	\captionof{figure}{Features Choosen}
+	\includegraphics[scale=0.4]{../screenshot/features.png}
+  \end{center}
+
+\end{multicols*}
+
+
+
+\begin{thebibliography}{9}
+	\bibitem{texbook}
+	Horowitz, J. M., Igielnik, R.,  Kochhar, R. (2020, August 17). Trends in U.S. income and wealth inequality. Pew Research Center's Social Demographic Trends Project.
+
+	\bibitem{texbook}
+	Weller, C. (2021, January 6). The recession hits an already hollowed-out middle class. Forbes.
+
+	\bibitem{texbook}
+	Income inequality. Inequality.org. (2021, August 30). Retrieved November 20, 2021, from https://inequality.org/facts/income-inequality/. 
+
+	\bibitem{texbook}
+	Schaeffer, K. (2021, May 27). 6 facts about economic inequality in the U.S. Pew Research Center. Retrieved November 20, 2021, from https://www.pewresearch.org/fact-tank/2020/02/07/6-facts-about-economic-inequality-in-the-u-s/.
+	
+	\bibitem{texbook}
+	UCI Machine Learning Repository: US Census data (1990) Data Set. (n.d.). Retrieved November 21, 2021
+
+	\bibitem{texbook}
+	Sklearn-feature-selection-Selectfrommodel. scikit. (n.d.). Retrieved November 22, 2021, from  https://scikit-learn.org 
+
+\end{thebibliography}
+
+\end{document}
