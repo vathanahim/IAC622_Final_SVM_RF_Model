@@ -137,8 +137,75 @@ biases of one feature over the other when training the machine learning models.
   \subsection{Data Pre-Processing}
   \begin{center}
   	\captionof{figure}{Features Choosen}
-	\includegraphics[scale=0.4]{../screenshot/features.png}
+	\includegraphics[scale=0.35]{../screenshot/features.png}
   \end{center}
+
+
+\section{Machine Learning Training/Predicting}
+  \hspace*{5mm} In order to process our data for machine learning, the dataset was split into a train and test set of 80:20 ratio. Susequently, for the parameters of the random forest machine learning model,
+  parameter tuning was done in order to find the optimal parameter for the random forest model for the given dataset. GridSearchCV was used to find the optimal parameters for the random forest model. With the given input of a list of
+  maxdepth, boostrap, maxfeatures, minsamplesleaf, minsamplessplit, and nestimator, the GridSearchCV had found the optimal parameter for the random forest model with input paremeters seen in 5.1 Figure 9. For the SVM model,
+  the linear kernel classifier would be used to train on the same dataset in order to compare the results. 
+  \subsection{Random Forest Figures}
+  \begin{center}
+  	\captionof{figure}{Parameters Tuning}
+	\includegraphics[scale=0.35]{../screenshot/parameter_tune.png}	
+  \end{center}
+
+
+  \section{Model Results}
+  \hspace*{5mm} The random forest model resulted in a training and testing accuracy of 0.93 and 0.84 as shown in 6.1 Figure 10. The marginal differences in between the training and testing can be attributed to the models slight overfitting
+  of the training dataset. Nevertheless, this marginal differences between the training and testing accuracy was not considered to be signficant enough to reject the results of the model. Class0 and class1 respresents
+  those that made under 50K and at/above 50k per year. Because this dataset was taken from the census bareau, it was noted that there were more class0 than that of class1. This means that there were more observations who's income was less than 50k than that of at/above
+  50k as the dataset represents the overall socio-economic status of the United States Population. Therefore, in order to alleviate the differences in classes, class1 was assigned the same weight as class0. 
+  However, the adjustments of class weights still affected the prediction of class1. This can be seen in in 6.1 Figure 11 as the true positive score for class0 is signficantly higher at a recall rate of 0.93 compared to class1 with a recall rate
+  of 0.55. The adjustments of weights between class0 and class1 help alleviate the inbalanced dataset for training the random forest model based on the the precision value of 0.86 and 0.73 for class0 and class1, however,
+	it still created a bias towards class0 based on the recall rate.
+
+
+  \subsection{Random Forest Figures}
+  \begin{center}
+  	\captionof{figure}{Random Forest Score}
+	\includegraphics[scale=0.4]{../screenshot/rf_score.png}	
+	\captionof{figure}{Random Forest Confusion Matrix}
+	\includegraphics[scale=0.5]{../screenshot/rf_cf.png}
+  \end{center}
+	
+	\hspace*{5mm} The SVM model resulted in a training and testing accuracy of 0.82 and 0.82 respectively based on 6.2 Figure 12. There was no difference between the accuracy of the train set and the testing set, which indacated that the SVM
+	model had no biases towards the train set or testing set. However, the recall rate was similar to that of the random forest model as it had a high true positive rate for class0 and low true positive rate for class1 based on 6.2 Figure 13. This exposed the imbalance nature of the datase. Subsequently,
+	 it also showed that the adjustment of class weights to alleviated the dataset's imbalanced characteristics did not imporve the model to a large extent. Additionally, the precision rate for class0 and class1 was 0.86 and 0.66. There was a larger degree of difference in precision
+	rate of class0 and class1 in comparison to the precision rate of the random forest model. Thus, indicating that the SVM model was more biased towards class0 to a larger extent than the random forest model.  
+
+	\subsection{SVM Figures}
+	\begin{center}
+		\captionof{figure}{SVM Score}
+	\includegraphics[scale=0.4]{../screenshot/svm_score.png}
+	\includegraphics[scale=0.4]{../screenshot/svm_tt.png}	
+	\captionof{figure}{SVM Confusion Matrix}
+	\includegraphics[scale=0.5]{../screenshot/svm_cf.png}
+	\end{center}
+
+
+	\hspace*{5mm} Finally, feature importance ranking was done to see which features were indicative in determining potential income earning. Based on the 6.3 Figure 14, it was found that age, capital-gain, hours-per-week, and education-num were,
+	to a large extent, strong indicators of potential earning incoming as each of the four features scored highest in terms of its relative importance to the predicted varaible. This would give lawmakers a quantitative idea of what variables
+	can help alleviate the shifting wealth gap in the United States as they could design their social and economic policies around those variables. 
+	\subsection{Features}
+	\begin{center}
+		\captionof{figure}{Feature Score}
+	\includegraphics[scale=0.4]{../screenshot/feature.png}
+	\end{center}
+
+
+	\section{Conclusion}
+	\hspace*{5mm} In contrast to the random forest multiple, the support vector machine model took longer to train in terms of its time complexity. The SVM model took aproximately 6 hours to train in comparison to 1.2 seconds of time that it 
+    took to train the random forest model. Thus, for speed and efficiency, the random forest model performed better than that of the SVM model. In terms of its accuracy and precision, the SVM model tend to show more biased towards class0 than that
+	of the random forest model. Additionally, the random forest model also scored a higher accuracy in both its training and testing dataset. The random forest model recall rate for both class0 and class1 was also significantly
+	higher than that of the SVm model, and therefore, the random forest model performed better in its accuracy and precision and should be used for predicting potential income in order to shed an insight into the current social-economic problem. 
+
+	\hspace*{5mm} Within the scope of socio-economic variables that impacted potential earning income in this dataset; age, capitalgain, hourswork, and number of years in education were variables that were indicative of determing potential income earning. Although age can be an ambiguous variable in determining income, 
+	capital gain, hours work and number of years in education were not. Lawmakers can design their policy to adjusting capital gains, and wages in order to lessen the divide in wealth inequality between socio-economic classes in America. Education was also seen as an important
+	indicator to income, thus, policies that are designed to reduce education expenses and provide equal opportunity to access higher education would also play a pivotal role in bridging the gap of socio-economic classes in the United States 
+	and strenghtening the middle class. 
 
 \end{multicols*}
 
